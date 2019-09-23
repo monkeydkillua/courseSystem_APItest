@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.7.3 on win32)" generated="20190922 23:57:00.292" rpa="false">
+<suite id="s1" name="Tc" source="G:\fuckrf\tc\tc.robot">
+<test id="s1-t1" name="test 01">
+<kw name="rf sign in" type="setup">
+<kw name="Sign In" library="TestSignIn">
+<arguments>
+<arg>${sign_in_username}</arg>
+<arg>${sign_in_password}</arg>
+</arguments>
+<assign>
+<var>@{session_id}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.128" level="INFO">@{session_id} = [ {'retcode': 0} | pqniwkda3pufbfedzv1ieo6n161phbdh ]</msg>
+<status status="PASS" starttime="20190922 23:57:00.606" endtime="20190922 23:57:02.128"></status>
+</kw>
+<kw name="Modify Session Id Course" library="TestCourse">
+<arguments>
+<arg>${session_id}[1]</arg>
+</arguments>
+<status status="PASS" starttime="20190922 23:57:02.128" endtime="20190922 23:57:02.129"></status>
+</kw>
+<kw name="Modify Session Id Teacher" library="TestTeacher">
+<arguments>
+<arg>${session_id}[1]</arg>
+</arguments>
+<status status="PASS" starttime="20190922 23:57:02.130" endtime="20190922 23:57:02.130"></status>
+</kw>
+<status status="PASS" starttime="20190922 23:57:00.605" endtime="20190922 23:57:02.131"></status>
+</kw>
+<kw name="Add Teacher" library="TestTeacher">
+<arguments>
+<arg>${teacher_name}</arg>
+<arg>${teacher_log_name}</arg>
+</arguments>
+<assign>
+<var>@{add_return_message}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.474" level="INFO">@{add_return_message} = [ {'retcode': 0, 'id': 336} | {'username': '张', 'realname': '清', 'display_idx': 1, 'courses': [], 'id': 336, 'desc': ''} ]</msg>
+<status status="PASS" starttime="20190922 23:57:02.132" endtime="20190922 23:57:02.474"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${add_return_message}</arg>
+</arguments>
+<status status="PASS" starttime="20190922 23:57:02.476" endtime="20190922 23:57:02.477"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${add_return_message}[0][id]</arg>
+</arguments>
+<assign>
+<var>${add_return_id}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.479" level="INFO">${add_return_id} = 336</msg>
+<status status="PASS" starttime="20190922 23:57:02.478" endtime="20190922 23:57:02.479"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${success_code}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.481" level="INFO">${success_code} = 0</msg>
+<status status="PASS" starttime="20190922 23:57:02.480" endtime="20190922 23:57:02.481"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the results.</doc>
+<arguments>
+<arg>int(${success_code})</arg>
+</arguments>
+<assign>
+<var>${success_code}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.483" level="INFO">${success_code} = 0</msg>
+<status status="PASS" starttime="20190922 23:57:02.482" endtime="20190922 23:57:02.483"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${add_return_message}[0][retcode]</arg>
+<arg>${success_code}</arg>
+</arguments>
+<status status="PASS" starttime="20190922 23:57:02.485" endtime="20190922 23:57:02.486"></status>
+</kw>
+<kw name="Show Teacher" library="TestTeacher">
+<assign>
+<var>${show_return_message}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.515" level="INFO">${show_return_message} = {'retcode': 0, 'retlist': [{'id': 336, 'realname': '清', 'desc': '', 'display_idx': 1, 'username': '张', 'courses': []}], 'total': 1}</msg>
+<status status="PASS" starttime="20190922 23:57:02.487" endtime="20190922 23:57:02.515"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${show_return_message}[retlist][0]</arg>
+</arguments>
+<assign>
+<var>${show_return_retlist}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.516" level="INFO">${show_return_retlist} = {'id': 336, 'realname': '清', 'desc': '', 'display_idx': 1, 'username': '张', 'courses': []}</msg>
+<status status="PASS" starttime="20190922 23:57:02.516" endtime="20190922 23:57:02.516"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${show_return_retlist}</arg>
+</arguments>
+<status status="PASS" starttime="20190922 23:57:02.517" endtime="20190922 23:57:02.518"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${show_return_retlist}</arg>
+<arg>${add_return_message}[1]</arg>
+</arguments>
+<status status="PASS" starttime="20190922 23:57:02.519" endtime="20190922 23:57:02.519"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${show_return_message}[retlist][0][id]</arg>
+</arguments>
+<assign>
+<var>${show_return_id}</var>
+</assign>
+<msg timestamp="20190922 23:57:02.520" level="INFO">${show_return_id} = 336</msg>
+<status status="PASS" starttime="20190922 23:57:02.520" endtime="20190922 23:57:02.520"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${show_return_id}</arg>
+<arg>${add_return_id}</arg>
+</arguments>
+<status status="PASS" starttime="20190922 23:57:02.521" endtime="20190922 23:57:02.521"></status>
+</kw>
+<kw name="Clear Teachers" library="TestTeacher" type="teardown">
+<msg timestamp="20190922 23:57:02.655" level="INFO">老师已清空</msg>
+<status status="PASS" starttime="20190922 23:57:02.522" endtime="20190922 23:57:02.655"></status>
+</kw>
+<status status="PASS" starttime="20190922 23:57:00.604" endtime="20190922 23:57:02.656" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20190922 23:57:00.297" endtime="20190922 23:57:02.657"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="Tc">Tc</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
